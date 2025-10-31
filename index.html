@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ad Gate</title>
+<style>
+    body {
+        margin: 0;
+        background: #3cb043;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+    }
+
+    /* grid background */
+    body::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: 
+            linear-gradient(#ffffff33 1px, transparent 1px),
+            linear-gradient(90deg, #ffffff33 1px, transparent 1px);
+        background-size: 40px 40px;
+        pointer-events: none;
+    }
+
+    .container {
+        position: relative;
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 0 20px #0003;
+        text-align: center;
+        transition: 0.3s ease;
+    }
+
+    button {
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.25s;
+    }
+
+    button:hover {
+        transform: scale(1.05);
+    }
+
+    #unlockBtn {
+        margin-top: 15px;
+        display: none;
+    }
+
+    #codeFrame {
+        margin-top: 20px;
+        padding: 15px;
+        background: #f0f0f0;
+        border-radius: 10px;
+        display: none;
+    }
+
+    #copyBtn {
+        margin-top: 10px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <button id="adBtn">Watch Advertisement</button>
+
+    <button id="unlockBtn">Unlock</button>
+
+    <div id="codeFrame">
+        <div id="codeText" style="font-size:22px; margin-bottom:10px;">D4XCAL9</div>
+        <button id="copyBtn">Copy</button>
+    </div>
+</div>
+
+<script>
+const adBtn = document.getElementById("adBtn");
+const unlockBtn = document.getElementById("unlockBtn");
+const codeFrame = document.getElementById("codeFrame");
+const copyBtn = document.getElementById("copyBtn");
+const codeText = document.getElementById("codeText");
+
+adBtn.onclick = () => {
+    window.open("https://roblox.com", "_blank");
+    adBtn.disabled = true;
+    adBtn.innerText = "Viewing...";
+
+    setTimeout(() => {
+        adBtn.disabled = false;
+        adBtn.innerText = "Advertisement viewed ✅";
+        unlockBtn.style.display = "inline-block";
+    }, 5000);
+};
+
+unlockBtn.onclick = () => {
+    codeFrame.style.display = "block";
+};
+
+copyBtn.onclick = async () => {
+    await navigator.clipboard.writeText(codeText.innerText);
+    copyBtn.innerText = "Copied!";
+    setTimeout(() => { copyBtn.innerText = "Copy"; }, 1500);
+};
+</script>
+
+</body>
+</html>
